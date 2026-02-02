@@ -357,6 +357,16 @@ function updateCartCount() {
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
     document.getElementById('cart-count').textContent = totalItems;
     updateBottomCartCount();
+    updateCheckoutButtonState(); // Update checkout button state when cart changes
+}
+
+// Update checkout button state based on cart contents
+function updateCheckoutButtonState() {
+    const checkoutBtn = document.querySelector('.checkout-btn');
+    if (checkoutBtn) {
+        const cartIsEmpty = cart.length === 0;
+        checkoutBtn.disabled = cartIsEmpty;
+    }
 }
 
 // Show notification
@@ -365,14 +375,18 @@ function showNotification(message) {
     const notification = document.createElement('div');
     notification.textContent = message;
     notification.style.position = 'fixed';
-    notification.style.bottom = '20px';
+    notification.style.bottom = '80px';
     notification.style.left = '50%';
     notification.style.transform = 'translateX(-50%)';
-    notification.style.backgroundColor = '#8B4513';
-    notification.style.color = 'white';
+    notification.style.backgroundColor = '#ffffffff';
+    notification.style.color = '#8B4513';
     notification.style.padding = '10px 20px';
     notification.style.borderRadius = '5px';
     notification.style.zIndex = '9999';
+    notification.style.width = '90%';
+    notification.style.fontWeight = 'bold';
+    notification.style.fontSize = '14px';
+    notification.style.textAlign = 'center';
     notification.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
     
     document.body.appendChild(notification);
@@ -394,6 +408,7 @@ function openCart(event) {
     }
 
     renderCartItems();
+    updateCheckoutButtonState(); // Update checkout button state based on cart contents
     document.getElementById('cart-modal').classList.remove('hidden');
     document.body.style.overflow = 'hidden';
 
@@ -416,21 +431,22 @@ function closeCart() {
 function renderCartItems() {
     const cartItemsContainer = document.getElementById('cart-items');
     const cartTotalElement = document.getElementById('cart-total-price');
-    
+
     cartItemsContainer.innerHTML = '';
-    
+
     if (cart.length === 0) {
         cartItemsContainer.innerHTML = '<p>Keranjang belanja kosong</p>';
         cartTotalElement.textContent = 'Rp 0';
+        updateCheckoutButtonState(); // Update button state when cart is empty
         return;
     }
-    
+
     let total = 0;
-    
+
     cart.forEach(item => {
         const itemTotal = item.price * item.quantity;
         total += itemTotal;
-        
+
         const cartItemElement = document.createElement('div');
         cartItemElement.className = 'cart-item';
         cartItemElement.innerHTML = `
@@ -447,11 +463,12 @@ function renderCartItems() {
                 </div>
             </div>
         `;
-        
+
         cartItemsContainer.appendChild(cartItemElement);
     });
-    
+
     cartTotalElement.textContent = formatRupiah(total);
+    updateCheckoutButtonState(); // Update button state after rendering items
 }
 
 // Update cart item quantity
@@ -473,6 +490,7 @@ function removeFromCart(productId) {
     cart = cart.filter(item => item.id !== productId);
     renderCartItems();
     updateCartCount();
+    updateCheckoutButtonState(); // Update button state after removing item
 }
 
 // Proceed to checkout
@@ -565,6 +583,7 @@ function confirmOrder() {
         // Clear cart after successful order
         cart = [];
         updateCartCount();
+        updateCheckoutButtonState(); // Update button state after clearing cart
     }, 2000); // Simulate 2 seconds processing time
 }
 

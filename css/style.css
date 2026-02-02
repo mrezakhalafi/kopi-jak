@@ -520,6 +520,8 @@ body {
 }
 
 .cart-item-price {
+    padding-top: 10px;
+    padding-bottom: 10px;
     color: #8B4513;
     font-weight: bold;
 }
@@ -527,7 +529,7 @@ body {
 .cart-item-quantity {
     display: flex;
     align-items: center;
-    margin-top: 5px;
+    margin-top: 15px;
 }
 
 .cart-item-quantity button {
@@ -555,6 +557,7 @@ body {
     padding-top: 15px;
     border-top: 1px solid #eee;
     text-align: right;
+    font-weight: bold;
 }
 
 .checkout-btn {
@@ -572,6 +575,11 @@ body {
 
 .checkout-btn:hover {
     background: linear-gradient(to right, #A0522D, #8B4513);
+}
+
+.checkout-btn:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
 }
 
 /* Login Modal */
@@ -1006,7 +1014,7 @@ body {
     align-items: center;
     text-decoration: none;
     color: #f0f0f0;
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     font-weight: bold;
     transition: color 0.3s ease;
     position: relative;
@@ -1026,4 +1034,8 @@ body {
 .main-app {
     padding-top: 60px;
     padding-bottom: 60px; /* Account for bottom navigation */
+}
+
+#order-items-summary{
+    margin-top: 10px;
 }
