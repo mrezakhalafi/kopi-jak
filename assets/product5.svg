@@ -1,0 +1,6 @@
+<!-- Placeholder for product5.jpg -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#FFFACD"/>
+  <path d="M50,150 Q150,50 250,150 Q150,250 50,150" fill="#DAA520"/>
+  <text x="150" y="155" font-family="Arial" font-size="20" fill="white" text-anchor="middle">Croissant</text>
+</svg>

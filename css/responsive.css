@@ -1,0 +1,75 @@
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .banner-carousel {
+        height: 200px;
+    }
+
+    .banner-text h3 {
+        font-size: 1rem;
+    }
+
+    .banner-text p {
+        font-size: 0.8rem;
+    }
+
+    .modal-content {
+        width: 95%;
+        max-height: 85vh;
+    }
+
+    .payment-methods {
+        grid-template-columns: 1fr;
+    }
+
+    .header-center h1 {
+        font-size: 1.3rem;
+    }
+
+    .menu-toggle, .cart-icon, .profile-icon {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .category-item {
+        min-width: 80px;
+        padding: 8px 10px;
+    }
+}
+
+/* Products grid adjustments - always 2 columns */
+.products-container {
+    grid-template-columns: repeat(2, 1fr) !important;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 360px) {
+    .splash-content .logo {
+        width: 100px;
+        height: 100px;
+    }
+
+    .splash-content h1 {
+        font-size: 1.8rem;
+    }
+
+    .product-card img {
+        height: 130px;
+    }
+
+    .product-info {
+        padding: 10px;
+    }
+
+    .modal-body {
+        padding: 15px;
+    }
+
+    .modal-header {
+        padding: 15px;
+    }
+
+    .modal-footer {
+        padding: 10px 15px;
+    }
+}

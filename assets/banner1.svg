@@ -1,0 +1,7 @@
+<!-- Placeholder for banner1.jpg -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <rect width="800" height="400" fill="#D2B48C"/>
+  <rect x="0" y="0" width="800" height="400" fill="#DEB887" opacity="0.7"/>
+  <text x="400" y="200" font-family="Arial" font-size="24" fill="#8B4513" text-anchor="middle">Promo Spesial Diskon 20%</text>
+  <text x="400" y="240" font-family="Arial" font-size="18" fill="#A0522D" text-anchor="middle">Hanya Hari Ini!</text>
+</svg>
