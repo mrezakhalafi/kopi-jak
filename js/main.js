@@ -166,6 +166,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize bottom navigation
     initBottomNav();
+
+    // Initialize product buttons
+    initProductButtons();
 });
 
 // Initialize carousel
@@ -318,6 +321,7 @@ function addToCart() {
         }
 
         updateCartCount();
+        updateProductButtons(); // Update product buttons to reflect cart state
         closeProductModal();
         showNotification(`${product.name} ditambahkan ke keranjang`);
     }
@@ -348,8 +352,46 @@ function addToCartDirect(productId, event) {
         }
 
         updateCartCount();
+        updateProductButtons(); // Update all product buttons to reflect cart state
         showNotification(`${product.name} ditambahkan ke keranjang`);
     }
+}
+
+// Update all product buttons to reflect cart state
+function updateProductButtons() {
+    // Loop through all products
+    products.forEach(product => {
+        const button = document.querySelector(`.add-to-cart-direct[data-product-id="${product.id}"]`) ||
+                      document.querySelector(`.cart-quantity-btn[data-product-id="${product.id}"]`);
+        if (button) {
+            // Find the quantity of this product in the cart
+            const cartItem = cart.find(item => item.id === product.id);
+            if (cartItem && cartItem.quantity > 0) {
+                // Change button to show quantity
+                button.textContent = cartItem.quantity;
+                button.classList.add('cart-quantity-btn');
+                button.classList.remove('add-to-cart-direct');
+            } else {
+                // Reset to + button if not in cart
+                button.textContent = '+';
+                button.classList.remove('cart-quantity-btn');
+                button.classList.add('add-to-cart-direct');
+            }
+        }
+    });
+}
+
+// Initialize product buttons when page loads
+function initProductButtons() {
+    // Add data attributes to all buttons
+    const buttons = document.querySelectorAll('.add-to-cart-direct');
+    buttons.forEach(button => {
+        const productId = button.getAttribute('onclick').match(/addToCartDirect\((\d+)/)[1];
+        button.setAttribute('data-product-id', productId);
+    });
+
+    // Update all buttons to reflect initial cart state
+    updateProductButtons();
 }
 
 // Update cart count in header
@@ -438,6 +480,7 @@ function renderCartItems() {
         cartItemsContainer.innerHTML = '<p>Keranjang belanja kosong</p>';
         cartTotalElement.textContent = 'Rp 0';
         updateCheckoutButtonState(); // Update button state when cart is empty
+        updateProductButtons(); // Update product buttons when cart is empty
         return;
     }
 
@@ -469,6 +512,7 @@ function renderCartItems() {
 
     cartTotalElement.textContent = formatRupiah(total);
     updateCheckoutButtonState(); // Update button state after rendering items
+    updateProductButtons(); // Update product buttons after rendering items
 }
 
 // Update cart item quantity
@@ -480,8 +524,9 @@ function updateCartItem(productId, action) {
         } else if (action === 'decrease' && item.quantity > 1) {
             item.quantity--;
         }
-        
+
         renderCartItems();
+        updateProductButtons(); // Update product buttons to reflect cart state
     }
 }
 
@@ -491,6 +536,7 @@ function removeFromCart(productId) {
     renderCartItems();
     updateCartCount();
     updateCheckoutButtonState(); // Update button state after removing item
+    updateProductButtons(); // Update product buttons to reflect cart state
 }
 
 // Proceed to checkout

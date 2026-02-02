@@ -363,6 +363,24 @@ body {
     flex-shrink: 0;
 }
 
+.cart-quantity-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    margin-left: 10px;
+    flex-shrink: 0;
+}
+
 /* Modals */
 .modal {
     position: fixed;
